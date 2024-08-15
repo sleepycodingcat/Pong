@@ -18,18 +18,24 @@ export default class Player2 extends Sprite {
         x: 9,
         y: 51,
       }),
+      new Costume("costume2", "./Player2/costumes/costume2.svg", {
+        x: 8.999999999999972,
+        y: 100.54955000000002,
+      }),
     ];
 
     this.sounds = [new Sound("pop", "./Player2/sounds/pop.wav")];
 
     this.triggers = [
       new Trigger(Trigger.GREEN_FLAG, this.whenGreenFlagClicked),
+      new Trigger(Trigger.GREEN_FLAG, this.whenGreenFlagClicked2),
     ];
   }
 
   *whenGreenFlagClicked() {
     this.goto(200, 0);
     this.size = 75;
+    this.costume = "costume1";
     while (true) {
       if (this.keyPressed("up arrow")) {
         this.y += 5;
@@ -42,6 +48,17 @@ export default class Player2 extends Sprite {
       }
       if (this.compare(this.y, 140) > 0) {
         this.y = 140;
+      }
+      yield;
+    }
+  }
+
+  *whenGreenFlagClicked2() {
+    while (true) {
+      if (this.touching(this.sprites["Powerup1p2"].andClones())) {
+        this.costume = "costume2";
+        yield* this.wait(20);
+        this.costume = "costume1";
       }
       yield;
     }

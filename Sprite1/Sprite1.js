@@ -20,7 +20,7 @@ export default class Sprite1 extends Sprite {
       }),
     ];
 
-    this.sounds = [new Sound("pop", "./Sprite1/sounds/pop.wav")];
+    this.sounds = [new Sound("Low Whoosh", "./Sprite1/sounds/Low Whoosh.wav")];
 
     this.triggers = [
       new Trigger(Trigger.GREEN_FLAG, this.whenGreenFlagClicked),
@@ -31,9 +31,14 @@ export default class Sprite1 extends Sprite {
         this.whenIReceiveReset
       ),
     ];
+
+    this.vars.lastX = -67.88472724688204;
+    this.vars.lasty = -94.25737378262285;
   }
 
   *whenGreenFlagClicked() {
+    this.vars.lasty = 0;
+    this.vars.lastX = 0;
     this.broadcast("reset ");
   }
 
@@ -56,13 +61,21 @@ export default class Sprite1 extends Sprite {
     this.goto(0, 0);
     yield* this.wait(1);
     while (true) {
+      this.vars.lastX = this.x;
+      this.vars.lasty = this.y;
       this.move(10);
       this.ifOnEdgeBounce();
       if (this.touching(this.sprites["Player1"].andClones())) {
-        this.direction += this.random(130, 180);
+        yield* this.startSound("Low Whoosh");
+        this.y = this.toNumber(this.vars.lasty);
+        this.x = this.toNumber(this.vars.lastX);
+        this.direction += this.random(50, 180);
       }
       if (this.touching(this.sprites["Player2"].andClones())) {
-        this.direction += this.random(130, 180);
+        yield* this.startSound("Low Whoosh");
+        this.y = this.toNumber(this.vars.lasty);
+        this.x = this.toNumber(this.vars.lastX);
+        this.direction += this.random(150, 180);
       }
       yield;
     }
