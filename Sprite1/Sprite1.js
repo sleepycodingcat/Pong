@@ -32,8 +32,8 @@ export default class Sprite1 extends Sprite {
       ),
     ];
 
-    this.vars.lastX = -67.88472724688204;
-    this.vars.lasty = -94.25737378262285;
+    this.vars.lastX = 0;
+    this.vars.lasty = 0;
   }
 
   *whenGreenFlagClicked() {

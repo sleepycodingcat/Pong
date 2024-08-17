@@ -49,6 +49,12 @@ export default class Player2 extends Sprite {
       if (this.compare(this.y, 140) > 0) {
         this.y = 140;
       }
+      if (this.compare(-100, this.y) > 0 && this.costumeNumber === 2) {
+        this.y = -100;
+      }
+      if (this.compare(this.y, 100) > 0 && this.costumeNumber === 2) {
+        this.y = 100;
+      }
       yield;
     }
   }

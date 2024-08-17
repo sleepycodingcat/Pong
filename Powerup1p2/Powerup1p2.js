@@ -24,31 +24,16 @@ export default class Powerup1p2 extends Sprite {
 
     this.triggers = [
       new Trigger(Trigger.GREEN_FLAG, this.whenGreenFlagClicked),
-      new Trigger(Trigger.GREEN_FLAG, this.whenGreenFlagClicked2),
       new Trigger(
         Trigger.BROADCAST,
         { name: "powerup p1p2" },
         this.whenIReceivePowerupP1p2
       ),
+      new Trigger(Trigger.GREEN_FLAG, this.whenGreenFlagClicked2),
     ];
   }
 
   *whenGreenFlagClicked() {
-    this.visible = false;
-    while (true) {
-      while (!(this.sprites["Player2"].costumeNumber === 1)) {
-        yield;
-      }
-      yield* this.wait(this.random(10, 25));
-      this.goto(200, this.random(-120, 100));
-      this.visible = true;
-      yield* this.wait(10);
-      this.broadcast("powerup p1p2");
-      yield;
-    }
-  }
-
-  *whenGreenFlagClicked2() {
     while (true) {
       if (this.touching(this.sprites["Player2"].andClones())) {
         yield* this.startSound("Collect");
@@ -60,5 +45,20 @@ export default class Powerup1p2 extends Sprite {
 
   *whenIReceivePowerupP1p2() {
     this.visible = false;
+  }
+
+  *whenGreenFlagClicked2() {
+    this.visible = false;
+    while (true) {
+      while (!(this.sprites["Player1"].costumeNumber === 1)) {
+        yield;
+      }
+      yield* this.wait(this.random(10, 25));
+      this.goto(-200, this.random(-120, 100));
+      this.visible = true;
+      yield* this.wait(10);
+      this.broadcast("powerup 1p1 hide");
+      yield;
+    }
   }
 }
