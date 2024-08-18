@@ -50,13 +50,19 @@ export default class Powerup1p2 extends Sprite {
   *whenGreenFlagClicked2() {
     this.visible = false;
     while (true) {
-      while (!(this.sprites["Player1"].costumeNumber === 1)) {
+      while (!(this.sprites["Player2"].costumeNumber === 1)) {
         yield;
       }
-      yield* this.wait(this.random(10, 25));
-      this.goto(-200, this.random(-120, 100));
+      yield* this.wait(this.random(5, 10));
+      this.goto(200, this.random(-120, 100));
       this.visible = true;
-      yield* this.wait(10);
+      for (let i = 0; i < 10; i++) {
+        while (!(this.sprites["Player2"].costumeNumber === 1)) {
+          yield;
+        }
+        yield* this.wait(1);
+        yield;
+      }
       this.broadcast("powerup 1p1 hide");
       yield;
     }

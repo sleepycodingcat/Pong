@@ -9,18 +9,18 @@ import {
   Sound,
 } from "https://unpkg.com/leopard@^1/dist/index.esm.js";
 
-export default class Sprite1 extends Sprite {
+export default class Ball extends Sprite {
   constructor(...args) {
     super(...args);
 
     this.costumes = [
-      new Costume("costume1", "./Sprite1/costumes/costume1.svg", {
+      new Costume("costume1", "./Ball/costumes/costume1.svg", {
         x: 5.699999999999989,
         y: 5.699999999999989,
       }),
     ];
 
-    this.sounds = [new Sound("Low Whoosh", "./Sprite1/sounds/Low Whoosh.wav")];
+    this.sounds = [new Sound("Low Whoosh", "./Ball/sounds/Low Whoosh.wav")];
 
     this.triggers = [
       new Trigger(Trigger.GREEN_FLAG, this.whenGreenFlagClicked),
@@ -32,8 +32,8 @@ export default class Sprite1 extends Sprite {
       ),
     ];
 
-    this.vars.lastX = 0;
-    this.vars.lasty = 0;
+    this.vars.lastX = 83.65134112013448;
+    this.vars.lasty = 126.95257403692065;
   }
 
   *whenGreenFlagClicked() {

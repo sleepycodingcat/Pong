@@ -26,8 +26,10 @@ export default class Stage extends StageBase {
       new Trigger(Trigger.GREEN_FLAG, this.whenGreenFlagClicked),
     ];
 
-    this.vars.player1Score = 0;
-    this.vars.player2Score = 0;
+    this.vars.player1Score = 2;
+    this.vars.player2Score = 1;
+    this.vars.speedP1 = 10;
+    this.vars.speedP2 = 5;
 
     this.watchers.player1Score = new Watcher({
       label: "player 1 score",

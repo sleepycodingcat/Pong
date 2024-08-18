@@ -37,7 +37,13 @@ export default class Powerup2p1 extends Sprite {
       yield* this.wait(this.random(5, 10));
       this.goto(-200, this.random(-120, 100));
       this.visible = true;
-      yield* this.wait(10);
+      for (let i = 0; i < 10; i++) {
+        while (!(this.sprites["Player1"].costumeNumber === 1)) {
+          yield;
+        }
+        yield* this.wait(1);
+        yield;
+      }
       this.visible = false;
       yield;
     }
